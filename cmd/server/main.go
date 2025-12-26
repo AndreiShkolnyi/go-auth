@@ -19,7 +19,7 @@ type server struct {
 	auth_v1.UnimplementedAuthV1Server
 }
 
-func (s *server) Get(ctx context.Context, req *auth_v1.GetRequest) (*auth_v1.GetResponse, error) {
+func (s *server) Get(_ context.Context, req *auth_v1.GetRequest) (*auth_v1.GetResponse, error) {
 	log.Printf("Note id: #{req.GetId()}")
 
 	return &auth_v1.GetResponse{
