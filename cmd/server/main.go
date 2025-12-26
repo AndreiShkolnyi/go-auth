@@ -20,15 +20,15 @@ type server struct {
 }
 
 func (s *server) Get(_ context.Context, req *auth_v1.GetRequest) (*auth_v1.GetResponse, error) {
-	log.Printf("Note id: #{req.GetId()}")
+	log.Printf("Received: %v", req.GetId())
 
 	return &auth_v1.GetResponse{
-		Id:     gofakeit.Int64(),
-		Name:   gofakeit.Name(),
-		Email:  gofakeit.Email(),
-		Role:   auth_v1.Role_USER,
-			CreatedAt: timestamppb.New(gofakeit.Date()),
-			UpdatedAt: timestamppb.New(gofakeit.Date()),
+		Id:        gofakeit.Int64(),
+		Name:      gofakeit.Name(),
+		Email:     gofakeit.Email(),
+		Role:      auth_v1.Role_USER,
+		CreatedAt: timestamppb.New(gofakeit.Date()),
+		UpdatedAt: timestamppb.New(gofakeit.Date()),
 	}, nil
 }
 
