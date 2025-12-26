@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package auth_v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+
+option go_package = "github.com/AndreiShkolnyi/go-auth/pkg/auth_v1;auth_v1";
+
+// CRUD Auth service v1
+service AuthV1 {
+  // Creates a new user with the provided credentials and returns the user ID.
+  rpc Create(CreateRequest) returns (CreateResponse);
+  // Get existed user by ID
+  rpc Get(GetRequest) returns (GetResponse);
+  // Update existed user by ID
+  rpc Update(UpdateRequest) returns (google.protobuf.Empty);
+  // Delete existed user by ID
+  rpc Delete(DeleteRequest) returns (google.protobuf.Empty);
+}
+
+// Allowed user roles
+enum Role {
+    USER = 0;
+    ADMIN = 1;
+}
+
+
+// Create request type
+message CreateRequest {
+    string name = 1;
+    string email = 2;
+    string password = 3;
+    string password_confirm = 4;
+    Role role = 5;
+}
+
+// Create response type
+message CreateResponse {
+    int64 id = 1;
+}
+
+// Create request type
+message GetRequest {
+    int64 id = 1;
+}
+
+// Get response type
+message GetResponse {
+    int64 id = 1;
+    string name = 2;
+    string email = 3;
+    Role role = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+// Update response type
+message UpdateRequest {
+    int64 id = 1;
+    google.protobuf.StringValue name = 2;
+    google.protobuf.StringValue email = 3;
+}
+
+
+// Delete response type
+message DeleteRequest {
+    int64 id = 1;
+}
